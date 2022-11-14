@@ -1,4 +1,5 @@
-import { ChartService } from './../../service/chart.service';
+import { SocketService } from '../../helper/services/socket.service';
+import { ChartService } from '../../helper/services/chart.service';
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 
@@ -27,13 +28,20 @@ export class HomeComponent implements OnInit {
       type: 'category',
       data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
     },
-    yAxis: {
-      type: 'value'
-    },
+    yAxis:[
+      {
+        type: 'value',
+      },
+      {
+        type: 'value'
+      }
+    ]
+    ,
     series: [
       {
         data: [108, 110, 95, 97, 101, 92, 93],
         type: 'line',
+        yAxisIndex: 1,
         smooth: true
       },
       {
@@ -44,14 +52,20 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(
-    private cs: ChartService
+    private cs: ChartService,
+    private socket: SocketService
   ) { }
 
   ngOnInit(): void {
-    this.options = this.cs.lineChart(this.chartDom)
-
+    this.getAPITest()
     // let myChart = echarts.init(this.chartDom);
     // this.options && myChart.setOption(this.options);
+  }
+
+  getAPITest() {
+    this.socket.getAPI().subscribe(rel => {
+      console.log(rel.response)
+    })
   }
 
 }

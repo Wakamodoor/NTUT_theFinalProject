@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './display/home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
